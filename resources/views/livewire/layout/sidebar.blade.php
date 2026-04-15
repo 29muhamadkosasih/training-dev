@@ -1,0 +1,111 @@
+<aside id="layout-menu" class="layout-menu menu-vertical  menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="{{ route('home') }}" wire:navigate
+            class="app-brand-link d-flex align-items-center flex-grow-1 text-decoration-none">
+            <img src="{{ $logoUrl }}" width="50" alt="Logo" class="h-auto" />
+            <span class="app-brand-text demo menu-text fw-bold ms-2">
+                {{ $appName }}
+            </span>
+        </a>
+
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto" role="button"
+            aria-label="Toggle menu" aria-controls="layout-menu" aria-expanded="true">
+            {{-- <i class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle"></i> --}}
+            <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
+        </a>
+    </div>
+
+    <div class="menu-inner-shadow"></div>
+    <ul class="menu-inner py-1">
+        <li class="menu-item {{ $isHomeRoute ? 'active' : '' }}">
+            <a href="{{ route('home') }}" wire:navigate class="menu-link">
+                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                <div>Home</div>
+            </a>
+        </li>
+
+        @can('documents.index')
+            <li class="menu-item {{ $isDocumentRoute ? 'active' : '' }}">
+                <a href="{{ route('documents.index') }}" wire:navigate class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-file-text"></i>
+                    <div>Document</div>
+                </a>
+            </li>
+        @endcan
+
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Master Data</span>
+        </li>
+
+        @can('products.index')
+            <li class="menu-item {{ $isProductRoute ? 'active' : '' }}">
+                <a href="{{ route('products.index') }}" wire:navigate class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-files"></i>
+                    <div>Product</div>
+                </a>
+            </li>
+        @endcan
+
+        @can('schemes.index')
+            <li class="menu-item {{ $isSchemeRoute ? 'active' : '' }}">
+                <a href="{{ route('schemes.index') }}" wire:navigate class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-sitemap"></i>
+                    <div data-i18n="Skema">Skema</div>
+                </a>
+            </li>
+        @endcan
+
+        @can('competencies.index')
+            <li class="menu-item {{ $isComRoute ? 'active' : '' }}">
+                <a href="{{ route('competencies.index') }}" wire:navigate class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-certificate"></i>
+                    <div data-i18n="Kompetensi">Kompetensi</div>
+                </a>
+            </li>
+        @endcan
+
+
+        @if ($canAccessUserManagement)
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">User Management</span>
+            </li>
+        @endif
+
+        @can('users.index')
+            <li class="menu-item {{ $isUserRoute ? 'active' : '' }}">
+                <a href="{{ route('users.index') }}" wire:navigate class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-users"></i>
+                    <div>Users</div>
+                </a>
+            </li>
+        @endcan
+
+        @canany(['permissions.index', 'roles.index'])
+            <li class="menu-item {{ $rolePermissionMenuClass }}">
+                <a href="javascript:void(0);" class="{{ $rolePermissionToggleClass }}"
+                    aria-expanded="{{ $rolePermissionSubmenuStyle ? 'true' : 'false' }}">
+                    <i class="menu-icon tf-icons ti ti-shield-check"></i>
+                    <div data-i18n="Roles & Permissions">Roles & Permissions</div>
+                </a>
+
+                <ul class="menu-sub" @if ($rolePermissionSubmenuStyle) style="{{ $rolePermissionSubmenuStyle }}" @endif>
+                    @can('roles.index')
+                        <li class="menu-item {{ $isRoleRoute ? 'active' : '' }}">
+                            <a href="{{ route('roles.index') }}" wire:navigate class="menu-link">
+                                <div data-i18n="Roles">Roles</div>
+                            </a>
+                        </li>
+                    @endcan
+
+                    @can('permissions.index')
+                        <li class="menu-item {{ $isPermissionRoute ? 'active' : '' }}">
+                            <a href="{{ route('permissions.index') }}" wire:navigate class="menu-link">
+                                <div data-i18n="Permission">Permission</div>
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcanany
+    </ul>
+</aside>
