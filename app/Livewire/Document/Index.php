@@ -4,13 +4,11 @@ namespace App\Livewire\Document;
 
 use App\Models\Competence;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use App\Models\Document;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
-#[Title('Document')]
 class Index extends Component
 {
     use WithPagination;

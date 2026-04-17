@@ -3,14 +3,12 @@
 namespace App\Livewire\Permission;
 
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Validation\Rule;
 
 #[Layout('layouts.app')]
-#[Title('Permission')]
 class Index extends Component
 {
     use WithPagination;

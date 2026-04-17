@@ -4,12 +4,10 @@ namespace App\Livewire\Competence;
 
 use App\Models\Competence;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
-#[Title('Competence')]
 class Index extends Component
 {
     use WithPagination;

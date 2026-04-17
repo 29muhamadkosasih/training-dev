@@ -25,7 +25,7 @@ class GeneralInformationController extends Controller
         'instruktur_pendidikan_formal',
         'instruktur_kompetensi_metodologi',
         'instruktur_kompetensi_teknis',
-        'instruktur_pengalaman_kerja',
+        'instruktur_pengalaman_kerja',  
         'instruktur_persyaratan_khusus',
     ];
 

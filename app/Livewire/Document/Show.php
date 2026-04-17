@@ -5,11 +5,9 @@ namespace App\Livewire\Document;
 use App\Models\Document;
 use App\Models\GeneralInformation;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.app')]
-#[Title('Show Document')]
 class Show extends Component
 {
     public $documentId;

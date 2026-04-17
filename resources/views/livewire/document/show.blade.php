@@ -54,8 +54,11 @@
                         </div>
 
                         <div class="text-end mt-4">
-                            <a href="{{ route('documents.index') }}" class="btn btn-secondary" wire:navigate>
+                            <a href="{{ route('documents.index') }}" class="btn btn-secondary me-2" wire:navigate>
                                 Kembali
+                            </a>
+                            <a href="{{ route('documents.pdf', $data->id) }}" class="btn btn-primary" target="_blank">
+                                PDF
                             </a>
                         </div>
                     @else
@@ -81,6 +84,15 @@
                     <h5 class="mb-0">B. KURIKULUM PELATIHAN BERBASIS KOMPETENSI</h5>
                     <a href="{{ route('curricula.index', $data->id) }}" wire:navigate class="btn btn-primary">
                         Kelola Kurikulum
+                    </a>
+                </div>
+            </div>
+            <!-- Card Silabus -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">C.	SILABUS PELATIHAN BERBASIS KOMPETENSI</h5>
+                    <a href="{{ route('silabus.index', $data->id) }}" wire:navigate class="btn btn-primary">
+                        Kelola Silabus
                     </a>
                 </div>
             </div>

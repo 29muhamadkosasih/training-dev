@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/documents/create', \App\Livewire\Document\Create::class)->name('documents.create')->middleware('permission:documents.create');
     Route::get('/documents/{id}/show', \App\Livewire\Document\Show::class)->name('documents.show')->middleware('permission:documents.show');
     Route::post('/documents', [\App\Http\Controllers\DocumentController::class, 'store'])->name('document.store')->middleware('permission:documents.create');
+    Route::get('/documents/{id}/pdf', [\App\Http\Controllers\DocumentController::class, 'getViewPdf'])->name('documents.pdf');
 
     // General Information Routes
     Route::get('/documents/{document_id}/general-informations', [\App\Http\Controllers\GeneralInformationController::class, 'index'])->name('general-informations.index');
@@ -50,4 +51,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/documents/{document_id}/curricula/{id}/edit', [\App\Http\Controllers\CurriculumController::class, 'edit'])->name('curricula.edit');
     Route::put('/documents/{document_id}/curricula/{id}', [\App\Http\Controllers\CurriculumController::class, 'update'])->name('curricula.update');
     Route::delete('/documents/{document_id}/curricula/{id}', [\App\Http\Controllers\CurriculumController::class, 'destroy'])->name('curricula.destroy');
+
+    // Silabus Routes
+    Route::get('/documents/{document_id}/silabus', [\App\Http\Controllers\SilabusController::class, 'index'])->name('silabus.index');
+    Route::get('/documents/{document_id}/silabus/create', [\App\Http\Controllers\SilabusController::class, 'create'])->name('silabus.create');
+    Route::get('/documents/{document_id}/silabus/create/{unit_kompetensi_id}', [\App\Http\Controllers\SilabusController::class, 'createUnit'])->name('silabus.create.unit');
+    Route::post('/documents/{document_id}/silabus', [\App\Http\Controllers\SilabusController::class, 'store'])->name('silabus.store');
+    Route::post('/documents/{document_id}/silabus/{unit_kompetensi_id}', [\App\Http\Controllers\SilabusController::class, 'storeUnit'])->name('silabus.store.unit');
+    Route::get('/documents/{document_id}/silabus/{unit_kompetensi_id}/edit', [\App\Http\Controllers\SilabusController::class, 'editUnit'])->name('silabus.edit.unit');
+    Route::put('/documents/{document_id}/silabus/{unit_kompetensi_id}/edit', [\App\Http\Controllers\SilabusController::class, 'updateUnit'])->name('silabus.update.unit');
+    Route::get('/documents/{document_id}/silabus/{id}/edit', [\App\Http\Controllers\SilabusController::class, 'edit'])->name('silabus.edit');
+    Route::put('/documents/{document_id}/silabus/{id}', [\App\Http\Controllers\SilabusController::class, 'update'])->name('silabus.update');
+    Route::delete('/documents/{document_id}/silabus/{unit_kompetensi_id}', [\App\Http\Controllers\SilabusController::class, 'destroy'])->name('silabus.destroy.unit');
 });

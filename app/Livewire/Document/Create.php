@@ -5,11 +5,9 @@ namespace App\Livewire\Document;
 use App\Models\Competence;
 use App\Models\Document;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.app')]
-#[Title('Create Document')]
 class Create extends Component
 {
     public $competence_id = '';
