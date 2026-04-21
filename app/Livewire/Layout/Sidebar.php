@@ -31,7 +31,7 @@ class Sidebar extends Component
 
         // User Routes
         $isUserRoute = request()->routeIs('users.*');
-        $isDocumentRoute = request()->routeIs('documents.*') || request()->routeIs('general-informations.*') || request()->routeIs('curricula.*') || request()->routeIs('silabus.*');
+        $isDocumentRoute = request()->routeIs('documents.*') || request()->routeIs('general-informations.*') || request()->routeIs('curricula.*') || request()->routeIs('silabus.*') || request()->routeIs('lesson-plans.*') || request()->routeIs('equipments.*') || request()->routeIs('supplys.*');
         $isUserDocumentOpen = $isUserRoute || $isDocumentRoute;
 
         // Role & Permission Routes

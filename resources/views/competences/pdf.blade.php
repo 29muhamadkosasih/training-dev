@@ -211,9 +211,4 @@
         @endforeach
 
     </main>
-
-    {{-- <div class="page-break"></div>
-    <main>
-        KONTOL
-    </main> --}}
 </body>

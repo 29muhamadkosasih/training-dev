@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', \App\Livewire\Dashboard::class)->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('setting-apps', [\App\Http\Controllers\SettingAppController::class, 'index'])->name('setting_apps.index');
@@ -63,4 +63,32 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/documents/{document_id}/silabus/{id}/edit', [\App\Http\Controllers\SilabusController::class, 'edit'])->name('silabus.edit');
     Route::put('/documents/{document_id}/silabus/{id}', [\App\Http\Controllers\SilabusController::class, 'update'])->name('silabus.update');
     Route::delete('/documents/{document_id}/silabus/{unit_kompetensi_id}', [\App\Http\Controllers\SilabusController::class, 'destroy'])->name('silabus.destroy.unit');
+
+    // Lesson Plans Routes
+    Route::get('/documents/{document_id}/lesson-plans', [\App\Http\Controllers\LessonPlanController::class, 'index'])->name('lesson-plans.index');
+    Route::get('/documents/{document_id}/lesson-plans/create', [\App\Http\Controllers\LessonPlanController::class, 'create'])->name('lesson-plans.create');
+    Route::post('/documents/{document_id}/lesson-plans', [\App\Http\Controllers\LessonPlanController::class, 'store'])->name('lesson-plans.store');
+    Route::get('/documents/{document_id}/lesson-plans/{id}/edit', [\App\Http\Controllers\LessonPlanController::class, 'edit'])->name('lesson-plans.edit');
+    Route::put('/documents/{document_id}/lesson-plans/{id}', [\App\Http\Controllers\LessonPlanController::class, 'update'])->name('lesson-plans.update');
+    Route::delete('/documents/{document_id}/lesson-plans/{id}', [\App\Http\Controllers\LessonPlanController::class, 'destroy'])->name('lesson-plans.destroy');
+
+    // Equipment Routes
+    Route::get('/documents/{document_id}/equipments', [\App\Http\Controllers\EquipmentController::class, 'index'])->name('equipments.index');
+    Route::get('/documents/{document_id}/equipments/create', [\App\Http\Controllers\EquipmentController::class, 'create'])->name('equipments.create');
+    Route::delete('/documents/{document_id}/equipments/all', [\App\Http\Controllers\EquipmentController::class, 'destroyAll'])->name('equipments.destroy-all');
+    Route::post('/documents/{document_id}/equipments', [\App\Http\Controllers\EquipmentController::class, 'store'])->name('equipments.store');
+    Route::delete('/documents/{document_id}/equipments/{equipment_id}/details/{detail_id}', [\App\Http\Controllers\EquipmentController::class, 'destroyDetail'])->name('equipments.destroy-detail');
+    Route::get('/documents/{document_id}/equipments/{id}/edit', [\App\Http\Controllers\EquipmentController::class, 'edit'])->name('equipments.edit');
+    Route::put('/documents/{document_id}/equipments/{id}', [\App\Http\Controllers\EquipmentController::class, 'update'])->name('equipments.update');
+    Route::delete('/documents/{document_id}/equipments/{id}', [\App\Http\Controllers\EquipmentController::class, 'destroy'])->name('equipments.destroy');
+   
+    // Supply Routes
+    Route::get('/documents/{document_id}/supplys', [\App\Http\Controllers\SupplyController::class, 'index'])->name('supplys.index');
+    Route::get('/documents/{document_id}/supplys/create', [\App\Http\Controllers\SupplyController::class, 'create'])->name('supplys.create');
+    Route::delete('/documents/{document_id}/supplys/all', [\App\Http\Controllers\SupplyController::class, 'destroyAll'])->name('supplys.destroy-all');
+    Route::post('/documents/{document_id}/supplys', [\App\Http\Controllers\SupplyController::class, 'store'])->name('supplys.store');
+    Route::delete('/documents/{document_id}/supplys/{supply_id}/details/{detail_id}', [\App\Http\Controllers\SupplyController::class, 'destroyDetail'])->name('supplys.destroy-detail');
+    Route::get('/documents/{document_id}/supplys/{id}/edit', [\App\Http\Controllers\SupplyController::class, 'edit'])->name('supplys.edit');
+    Route::put('/documents/{document_id}/supplys/{id}', [\App\Http\Controllers\SupplyController::class, 'update'])->name('supplys.update');
+    Route::delete('/documents/{document_id}/supplys/{id}', [\App\Http\Controllers\SupplyController::class, 'destroy'])->name('supplys.destroy');
 });

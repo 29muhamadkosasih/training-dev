@@ -48,7 +48,8 @@
                                 <th class="text-white">Skema</th>
                                 <th class="text-white">No Skema</th>
                                 <th class="text-white">No SKKNI</th>
-                                <th class="text-white text-center">Jumlah Kompetensi</th>
+                                <th class="text-white text-center">Jumlah Unit Kompetensi</th>
+                                <th class="text-white text-center">Ket. Dokumen</th>
                                 <th width="100px" class="text-center text-white">Action</th>
                             </tr>
                         </thead>
@@ -60,6 +61,52 @@
                                     <td>{{ $listData->competence->scheme?->no_scheme ?? 'N/A' }}</td>
                                     <td>{{ Str::limit($listData->competence->no_skkni, 100) ?? 'N/A' }}</td>
                                     <td class="text-center">{{ $listData->competence->competence_codes_count ?? 0 }}
+                                    </td>
+                                    <td class="text-left">
+                                        <ol style="margin-bottom: 0; padding-left: 20px;">
+                                            <li>A. INFORMASI UMUM
+                                                @if ($listData->status['general_information'])
+                                                    <span class="badge bg-success ms-2">Ada</span>
+                                                @else
+                                                    <span class="badge bg-danger ms-2">Belum Ada</span>
+                                                @endif
+                                            </li>
+                                            <li>B. KURIKULUM
+                                                @if ($listData->status['curriculum'])
+                                                    <span class="badge bg-success ms-2">Ada</span>
+                                                @else
+                                                    <span class="badge bg-danger ms-2">Belum Ada</span>
+                                                @endif
+                                            </li>
+                                            <li>C. SILABUS
+                                                @if ($listData->status['silabus'])
+                                                    <span class="badge bg-success ms-2">Ada</span>
+                                                @else
+                                                    <span class="badge bg-danger ms-2">Belum Ada</span>
+                                                @endif
+                                            </li>
+                                            <li>D. RENCANA PELAKSANAAN
+                                                @if ($listData->status['lesson_plan'])
+                                                    <span class="badge bg-success ms-2">Ada</span>
+                                                @else
+                                                    <span class="badge bg-danger ms-2">Belum Ada</span>
+                                                @endif
+                                            </li>
+                                            <li>E. DAFTAR PERALATAN
+                                                @if ($listData->status['equipment'])
+                                                    <span class="badge bg-success ms-2">Ada</span>
+                                                @else
+                                                    <span class="badge bg-danger ms-2">Belum Ada</span>
+                                                @endif
+                                            </li>
+                                            <li>F. DAFTAR PERLENGKAPAN
+                                                @if ($listData->status['supply'])
+                                                    <span class="badge bg-success ms-2">Ada</span>
+                                                @else
+                                                    <span class="badge bg-danger ms-2">Belum Ada</span>
+                                                @endif
+                                            </li>
+                                        </ol>
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group gap-1" role="group">

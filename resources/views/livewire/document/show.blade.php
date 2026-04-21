@@ -2,20 +2,12 @@
     <div class="row justify-content-center">
         <div class="col-12 col-lg-12">
             <!-- Card Detail Document -->
-            <div class="card shadow-sm mb-4">
+            <div class="card shadow-sm mb-3">
                 <div class="card-header">
                     <h5 class="mb-0 text-center">Detail Document</h5>
                 </div>
                 <div class="card-body">
                     @if ($data)
-                        <div class="row mb-3">
-                            <div class="col-md-3">
-                                <strong>ID Document:</strong>
-                            </div>
-                            <div class="col-md-9">
-                                {{ $data->id }}
-                            </div>
-                        </div>
 
                         <div class="row mb-3">
                             <div class="col-md-3">
@@ -69,32 +61,78 @@
                 </div>
             </div>
 
-            <!-- Card Informasi Umum -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">A. INFORMASI UMUM</h5>
-                    <a href="{{ route('general-informations.index', $data->id) }}" wire:navigate class="btn btn-primary">
-                        Kelola Informasi Umum
-                    </a>
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm mb-4 h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">A. INFORMASI UMUM</h6>
+                            <a href="{{ route('general-informations.index', $data->id) }}" wire:navigate
+                                class="btn btn-primary btn-sm">
+                                Kelola
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!-- Card Kurikulum -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">B. KURIKULUM PELATIHAN BERBASIS KOMPETENSI</h5>
-                    <a href="{{ route('curricula.index', $data->id) }}" wire:navigate class="btn btn-primary">
-                        Kelola Kurikulum
-                    </a>
+
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm mb-4 h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">B. KURIKULUM</h6>
+                            <a href="{{ route('curricula.index', $data->id) }}" wire:navigate
+                                class="btn btn-primary btn-sm">
+                                Kelola
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!-- Card Silabus -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">C.	SILABUS PELATIHAN BERBASIS KOMPETENSI</h5>
-                    <a href="{{ route('silabus.index', $data->id) }}" wire:navigate class="btn btn-primary">
-                        Kelola Silabus
-                    </a>
+
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm mb-4 h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">C. SILABUS</h6>
+                            <a href="{{ route('silabus.index', $data->id) }}" wire:navigate
+                                class="btn btn-primary btn-sm">
+                                Kelola
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm mb-4 h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">D. RENCANA PELAKSANAAN PEMBELAJARAN</h6>
+                            <a href="{{ route('lesson-plans.index', $data->id) }}" wire:navigate
+                                class="btn btn-primary btn-sm">
+                                Kelola
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm mb-4 h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">E.	DAFTAR PERALATAN YANG DIGUNAKAN</h6>
+                            <a href="{{ route('equipments.index', $data->id) }}" wire:navigate
+                                class="btn btn-primary btn-sm">
+                                Kelola
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm mb-4 h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">F. DAFTAR PERLENGKAPAN YANG DIBUTUHKAN</h6>
+                            <a href="{{ route('supplys.index', $data->id) }}" wire:navigate
+                                class="btn btn-primary btn-sm">
+                                Kelola
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

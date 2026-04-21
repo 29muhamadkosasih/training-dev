@@ -3,6 +3,14 @@
 namespace App\Livewire\Document;
 
 use App\Models\Competence;
+use App\Models\Curriculum;
+use App\Models\Equipment;
+use App\Models\EquipmentDetail;
+use App\Models\GeneralInformation;
+use App\Models\LessonPlan;
+use App\Models\Silabus;
+use App\Models\Supply;
+use App\Models\SupplyDetail;
 use Livewire\Attributes\Layout;
 use App\Models\Document;
 use Livewire\Component;
@@ -33,6 +41,18 @@ class Index extends Component
         $this->resetPage();
     }
 
+    private function getDocumentStatus($documentId)
+    {
+        return [
+            'general_information' => GeneralInformation::where('document_id', $documentId)->exists(),
+            'curriculum' => Curriculum::where('document_id', $documentId)->exists(),
+            'silabus' => Silabus::where('document_id', $documentId)->exists(),
+            'lesson_plan' => LessonPlan::where('document_id', $documentId)->exists(),
+            'equipment' => Equipment::where('document_id', $documentId)->exists(),
+            'supply' => Supply::where('document_id', $documentId)->exists(),
+        ];
+    }
+
     public function render()
     {
         $perPageValue = $this->perPage ?: 99999; // Jika kosong (All), gunakan nilai besar
@@ -60,6 +80,8 @@ class Index extends Component
                 $document->competence->load('competenceCodes');
                 $document->competence->competence_codes_count = $document->competence->competenceCodes->count();
             }
+            // Add status for each document
+            $document->status = $this->getDocumentStatus($document->id);
         }
 
         return view('livewire.document.index', [
@@ -90,8 +112,29 @@ class Index extends Component
         $document = Document::find($this->dataId);
 
         if ($document) {
+            // Delete all related details
+            GeneralInformation::where('document_id', $document->id)->delete();
+            Curriculum::where('document_id', $document->id)->delete();
+            Silabus::where('document_id', $document->id)->delete();
+            LessonPlan::where('document_id', $document->id)->delete();
+
+            // Delete equipment and its details
+            $equipments = Equipment::where('document_id', $document->id)->get();
+            foreach ($equipments as $equipment) {
+                EquipmentDetail::where('equipment_id', $equipment->id)->delete();
+            }
+            Equipment::where('document_id', $document->id)->delete();
+
+            // Delete supply and its details
+            $supplies = Supply::where('document_id', $document->id)->get();
+            foreach ($supplies as $supply) {
+                SupplyDetail::where('supply_id', $supply->id)->delete();
+            }
+            Supply::where('document_id', $document->id)->delete();
+
+            // Delete document
             $document->delete();
-            $this->toast('message', 'Data berhasil dihapus.');
+            $this->toast('message', 'Data berhasil dihapus berserta detail-detailnya.');
         } else {
             $this->toast('warning', 'Data tidak ditemukan.');
         }

@@ -6,9 +6,15 @@ use App\Models\Competence;
 use App\Models\CompetenceCode;
 use App\Models\Curriculum;
 use App\Models\Document;
+use App\Models\Equipment;
+use App\Models\EquipmentDetail;
 use App\Models\GeneralInformation;
+use App\Models\LessonPlan;
+use App\Models\LessonPlanDetail;
 use App\Models\Silabus;
 use App\Models\SilabusDetail;
+use App\Models\Supply;
+use App\Models\SupplyDetail;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -32,6 +38,17 @@ class DocumentController extends Controller
         $dataKodeUnit = CompetenceCode::where('competence_id', $competences->id)->orderBy('number', 'asc')->get();
         $generalInformation = GeneralInformation::where('document_id', $document->id)->first();
         $sillabus = Silabus::where('document_id', $document->id)->orderBy('created_at', 'asc')->get();
+        $lessonPlans = LessonPlan::where('document_id', $document->id)->first();
+
+        $lessonPlanDetails = LessonPlanDetail::where('lesson_plan_id', optional($lessonPlans)->id)->orderBy('number', 'asc')->get();
+
+        $equipments = Equipment::where('document_id', $document->id)->first();
+
+        $equipmentDetails = EquipmentDetail::where('equipment_id', optional($equipments)->id)->orderBy('number', 'asc')->get();
+
+        $supplys = Supply::where('document_id', $document->id)->first();
+        $supplyDetails = SupplyDetail::where('supply_id', optional($supplys)->id)->orderBy('number', 'asc')->get();
+
         $curricula = Curriculum::with([
             'competenceCode' => function ($query) {
                 $query->orderBy('number', 'asc');
@@ -68,6 +85,12 @@ class DocumentController extends Controller
             'curricula' => $curricula,
             'subtotals' => $subtotals,
             'sillabus' => $sillabus,
+            'lessonPlanDetails' => $lessonPlanDetails,
+            'lessonPlans' => $lessonPlans,
+            'equipments' => $equipments,
+            'equipmentDetails' => $equipmentDetails,
+            'supplys' => $supplys,
+            'supplyDetails' => $supplyDetails,
         ])->setPaper('A4', 'portrait');
         $pdf->render();
         // Tambahkan nomor halaman ke PDF
